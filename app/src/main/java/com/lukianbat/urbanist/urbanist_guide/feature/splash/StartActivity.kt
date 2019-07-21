@@ -1,4 +1,4 @@
-package com.lukianbat.urbanist.urbanist_guide.feature.start
+package com.lukianbat.urbanist.urbanist_guide.feature.splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

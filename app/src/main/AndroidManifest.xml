@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.lukianbat.urbanist.urbanist_guide">
+          xmlns:tools="http://schemas.android.com/tools" package="com.lukianbat.urbanist.urbanist_guide">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
@@ -11,10 +10,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".feature.start.StartActivity">
-        </activity>
-        <activity android:name=".feature.list.presentation.ListActivity">
+            android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".feature.splash.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,11 +19,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".feature.list.presentation.ListActivity">
+        </activity>
+
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".feature.map.presentation.MapActivity">
         </activity>
     </application>
 
