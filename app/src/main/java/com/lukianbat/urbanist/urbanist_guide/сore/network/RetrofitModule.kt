@@ -1,6 +1,5 @@
 package com.lukianbat.urbanist.urbanist_guide.сore.network
 
-import com.lukianbat.urbanist.urbanist_guide.BuildConfig
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
