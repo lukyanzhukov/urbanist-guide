@@ -1,6 +1,5 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.start
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.lukianbat.urbanist.urbanist_guide.сore.domain.PreferenceRepository
 import com.lukianbat.urbanist.urbanist_guide.сore.presentation.BaseViewModel
@@ -13,7 +12,7 @@ class StartViewModule @Inject constructor(
     val city = MutableLiveData<String>()
 
     init {
-        city.value = preferenceRepository.getCity()
+        city.value = preferenceRepository.getCityName()
     }
 
     fun onOkClick() {
@@ -21,7 +20,7 @@ class StartViewModule @Inject constructor(
             eventsListener.showMessage("Введите город!")
             return
         }
-        preferenceRepository.setCity(city.value!!)
+        preferenceRepository.setCityName(city.value!!)
         eventsListener.routeToList()
     }
 

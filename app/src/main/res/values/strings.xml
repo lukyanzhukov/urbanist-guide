@@ -1,4 +1,29 @@
 <resources>
     <string name="app_name">Урбанист Гид</string>
     <string name="base_url">vwksdmomsco.com</string>
+    <string name="dialog_permission_desc">Для перехода к приложению разрешите определять вашу локацию в настройках
+    </string>
+    <string name="ok_button_text">Ок</string>
+
+    <string-array name="cities">
+        <item>Новосибирск</item>
+        <item>Кемерово</item>
+        <item>Москва</item>
+        <item>Санкт-Петербург</item>
+    </string-array>
+
+    <string-array name="cities_lat">
+        <item>55.0415</item>
+        <item>55.354968</item>
+        <item>55.7522</item>
+        <item>59.89444</item>
+    </string-array>
+
+    <string-array name="cities_lng">
+        <item>82.9346</item>
+        <item>86.087314</item>
+        <item>37.6156</item>
+        <item>30.26417</item>
+    </string-array>
+
 </resources>

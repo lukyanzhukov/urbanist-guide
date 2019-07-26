@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -19,11 +20,24 @@ class RetrofitModule {
         .addInterceptor(getInterceptor())
         .build()
 
+
     @Provides
     @Singleton
-    fun providesRetrofit(): Retrofit =
+    @Named("google")
+    fun providesGoogleRetrofit(): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://maps.googleapis.com/maps/api/")
+            .baseUrl("http://maps.googleapis.com/maps/api/directions/")
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+
+    @Provides
+    @Singleton
+    @Named("sightsafari")
+    fun providesSightsafariRetrofit(): Retrofit =
+        Retrofit.Builder()
+            .baseUrl("https://sightsafari.city/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)

@@ -1,5 +1,6 @@
 package com.lukianbat.urbanist.urbanist_guide.сore.dagger.module
 
+import com.lukianbat.urbanist.urbanist_guide.feature.list.di.PlaceListNetworkModule
 import com.lukianbat.urbanist.urbanist_guide.feature.map.presentation.MapActivity
 import com.lukianbat.urbanist.urbanist_guide.feature.list.presentation.PlaceListActivity
 import com.lukianbat.urbanist.urbanist_guide.feature.start.StartActivity
@@ -19,7 +20,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 interface ApplicationModule {
 
     @ActivityScope
-    @ContributesAndroidInjector/*(modules = [ListNetworkModule::class])*/
+    @ContributesAndroidInjector(modules = [PlaceListNetworkModule::class])
     fun PlaceListActivityInjector(): PlaceListActivity
 
     @ActivityScope
