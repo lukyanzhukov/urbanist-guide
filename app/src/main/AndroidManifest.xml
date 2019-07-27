@@ -9,12 +9,15 @@
     <application
             android:allowBackup="true"
             android:name=".сore.App"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_icon"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".feature.start.StartActivity">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".feature.start.StartActivity"
+                  android:screenOrientation="portrait"
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,7 +25,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".feature.list.presentation.PlaceListActivity">
+        <activity android:name=".feature.list.presentation.PlaceListActivity"
+                  android:theme="@style/AppListTheme"
+                  android:screenOrientation="portrait"
+        >
         </activity>
 
         <meta-data

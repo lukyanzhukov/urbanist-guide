@@ -5,7 +5,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel {
 
-    private val disposables = CompositeDisposable()
+    internal val disposables = CompositeDisposable()
 
     open fun onUnbind() {
         disposables.dispose()

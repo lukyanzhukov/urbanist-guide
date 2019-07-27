@@ -5,9 +5,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Body
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.repository.PlaceListRepository
+import com.lukianbat.urbanist.urbanist_guide.feature.start.StartViewModule
 import com.lukianbat.urbanist.urbanist_guide.сore.domain.PreferenceRepository
 import com.lukianbat.urbanist.urbanist_guide.сore.presentation.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -16,7 +18,7 @@ class PlaceListViewModel @Inject constructor(
     private val preferenceRepository: PreferenceRepository
 ) : BaseViewModel() {
     lateinit var eventsListener: EventsListener
-    val liveData = MutableLiveData<List<Body>>()
+    val liveData = MutableLiveData<ArrayList<Body>>()
 
     init {
         getPlaces()
@@ -30,12 +32,20 @@ class PlaceListViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread()).subscribe({ result ->
                 liveData.value = result.body
             }, { error ->
-                eventsListener.showMessage(error.message.toString())
-            })
+                Log.i("TAG", error.message.toString())
+            }).addTo(disposables)
+
+    }
+
+    fun setEventListener(eventsListener: EventsListener) {
+        this.eventsListener = eventsListener
     }
 
     interface EventsListener {
         fun routeToMap()
         fun showMessage(message: String)
+    }
+    fun onClick(){
+        eventsListener.routeToMap()
     }
 }

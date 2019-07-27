@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Урбанист Гид</string>
+    <string name="app_name">Урбанист.Гид</string>
     <string name="base_url">vwksdmomsco.com</string>
     <string name="dialog_permission_desc">Для перехода к приложению разрешите определять вашу локацию в настройках
     </string>

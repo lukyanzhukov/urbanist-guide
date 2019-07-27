@@ -9,14 +9,15 @@ import com.lukianbat.urbanist.urbanist_guide.R
 import com.lukianbat.urbanist.urbanist_guide.databinding.ItemPlaceBinding
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Body
 
+
 class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
 
 
-    var placeList: List<Body> = arrayListOf()
+    var placeList: ArrayList<Body> = arrayListOf()
+    var checkPlaceList = MutableLiveData<ArrayList<Body>>()
 
-    val onPlaceClickEvent = MutableLiveData<Body>()
 
-    fun updateEvents(placeList: List<Body>) {
+    fun updateEvents(placeList: ArrayList<Body>) {
         this.placeList = placeList
         notifyDataSetChanged()
     }
@@ -30,11 +31,24 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
     override fun getItemCount(): Int = placeList.size
 
     override fun onBindViewHolder(holder: PlacesViewHolder, position: Int) {
-
-        holder.binding?.place = placeList[position]
-        holder.binding?.root?.setOnClickListener { onPlaceClickEvent.value = placeList[position] }
-        holder.binding?.executePendingBindings()
+        if (placeList[position].name.isNullOrEmpty().not()) {
+            var isCheck = false
+            holder.binding?.place = placeList[position]
+            holder.binding?.root?.setOnClickListener {
+                isCheck = if (!isCheck) {
+                    holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_check_circle_24dp)
+                    checkPlaceList.value?.add(placeList[position])
+                    true
+                } else {
+                    holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_not_check_circle_24dp)
+                    checkPlaceList.value?.remove(placeList[position])
+                    false
+                }
+            }
+            holder.binding?.executePendingBindings()
+        }
     }
+
 }
 
 class PlacesViewHolder(binding: ItemPlaceBinding) : RecyclerView.ViewHolder(binding.root) {

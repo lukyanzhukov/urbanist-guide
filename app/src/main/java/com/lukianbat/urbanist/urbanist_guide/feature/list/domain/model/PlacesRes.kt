@@ -6,7 +6,7 @@ data class PlacesRes(
 
     @SerializedName("code") val code: Int,
     @SerializedName("description") val description: String,
-    @SerializedName("body") val body: List<Body>
+    @SerializedName("body") val body: ArrayList<Body>
 )
 
 data class Body(
