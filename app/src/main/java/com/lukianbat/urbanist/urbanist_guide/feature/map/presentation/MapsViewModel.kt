@@ -1,6 +1,8 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.map.presentation
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Body
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.repository.MapRepository
 import com.lukianbat.urbanist.urbanist_guide.feature.map.domain.model.Point
@@ -13,7 +15,9 @@ import javax.inject.Inject
 
 class MapsViewModel @Inject constructor(
     private val mapRepository: MapRepository
-) : BaseViewModel() {
+) : ViewModel() {
+
+    val liveDataRoute = MutableLiveData<ArrayList<Point>>()
 
     fun getRoute(placeList: ArrayList<Body>) {
         val points = arrayListOf<Point>()
@@ -27,9 +31,10 @@ class MapsViewModel @Inject constructor(
             .subscribe({ result ->
                 Log.i("TAG", result.paths.first().points)
                 val points = decodePolyline(result.paths.first().points)
+                liveDataRoute.value = points
                 Log.i("TAG", points.first().lng.toString() + "   " + points.first().lat.toString())
             }, { error ->
                 Log.i("TAG", error.message.toString())
-            }).addTo(disposables)
+            })
     }
 }

@@ -10,6 +10,7 @@
         <item>Кемерово</item>
         <item>Москва</item>
         <item>Санкт-Петербург</item>
+        <item>Братск</item>
     </string-array>
 
     <string-array name="cities_lat">
@@ -17,6 +18,7 @@
         <item>55.354968</item>
         <item>55.7522</item>
         <item>59.89444</item>
+        <item>56.1722577</item>
     </string-array>
 
     <string-array name="cities_lng">
@@ -24,6 +26,7 @@
         <item>86.087314</item>
         <item>37.6156</item>
         <item>30.26417</item>
+        <item>101.5906257</item>
     </string-array>
 
 </resources>

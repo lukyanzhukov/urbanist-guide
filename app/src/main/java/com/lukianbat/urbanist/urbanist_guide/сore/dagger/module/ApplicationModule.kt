@@ -4,6 +4,7 @@ import com.lukianbat.urbanist.urbanist_guide.feature.list.di.PlaceListNetworkMod
 import com.lukianbat.urbanist.urbanist_guide.feature.list.presentation.PlaceListActivity
 import com.lukianbat.urbanist.urbanist_guide.feature.map.di.MapNetworkModule
 import com.lukianbat.urbanist.urbanist_guide.feature.map.presentation.MapsActivity
+import com.lukianbat.urbanist.urbanist_guide.feature.map.presentation.ViewModelModule
 import com.lukianbat.urbanist.urbanist_guide.feature.start.StartActivity
 import com.lukianbat.urbanist.urbanist_guide.сore.dagger.scope.ActivityScope
 import com.lukianbat.urbanist.urbanist_guide.сore.network.RetrofitModule
@@ -15,7 +16,8 @@ import dagger.android.support.AndroidSupportInjectionModule
     includes = [
         AndroidSupportInjectionModule::class,
         RetrofitModule::class,
-        PreferenceModule::class
+        PreferenceModule::class,
+        ViewModelModule::class
     ]
 )
 interface ApplicationModule {
