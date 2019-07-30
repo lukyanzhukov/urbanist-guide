@@ -1,6 +1,8 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class PlacesRes(
 
@@ -9,6 +11,7 @@ data class PlacesRes(
     @SerializedName("body") val body: ArrayList<Body>
 )
 
+@Parcelize
 data class Body(
 
     @SerializedName("originId") val originId: Long,
@@ -24,4 +27,4 @@ data class Body(
     @SerializedName("centroid") val centroid: List<Double>,
     @SerializedName("links") val links: List<String>,
     @SerializedName("geometryType") val geometryType: String
-)
+) : Parcelable

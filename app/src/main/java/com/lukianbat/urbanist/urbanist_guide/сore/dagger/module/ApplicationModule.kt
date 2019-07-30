@@ -1,8 +1,9 @@
 package com.lukianbat.urbanist.urbanist_guide.сore.dagger.module
 
 import com.lukianbat.urbanist.urbanist_guide.feature.list.di.PlaceListNetworkModule
-import com.lukianbat.urbanist.urbanist_guide.feature.map.presentation.MapActivity
 import com.lukianbat.urbanist.urbanist_guide.feature.list.presentation.PlaceListActivity
+import com.lukianbat.urbanist.urbanist_guide.feature.map.di.MapNetworkModule
+import com.lukianbat.urbanist.urbanist_guide.feature.map.presentation.MapsActivity
 import com.lukianbat.urbanist.urbanist_guide.feature.start.StartActivity
 import com.lukianbat.urbanist.urbanist_guide.сore.dagger.scope.ActivityScope
 import com.lukianbat.urbanist.urbanist_guide.сore.network.RetrofitModule
@@ -24,8 +25,8 @@ interface ApplicationModule {
     fun PlaceListActivityInjector(): PlaceListActivity
 
     @ActivityScope
-    @ContributesAndroidInjector/*(modules = [MapNetworkModule::class])*/
-    fun mapActivityInjector(): MapActivity
+    @ContributesAndroidInjector(modules = [MapNetworkModule::class])
+    fun mapActivityInjector(): MapsActivity
 
     @ActivityScope
     @ContributesAndroidInjector

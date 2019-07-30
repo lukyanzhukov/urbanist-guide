@@ -1,5 +1,6 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.list.presentation.recycler
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -15,10 +16,11 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
 
     var placeList: ArrayList<Body> = arrayListOf()
     var checkPlaceList = MutableLiveData<ArrayList<Body>>()
-
-
+    lateinit var checked: Array<Boolean>
     fun updateEvents(placeList: ArrayList<Body>) {
         this.placeList = placeList
+        checked = Array(placeList.size) { false }
+        checkPlaceList.value = arrayListOf()
         notifyDataSetChanged()
     }
 
@@ -32,17 +34,17 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
 
     override fun onBindViewHolder(holder: PlacesViewHolder, position: Int) {
         if (placeList[position].name.isNullOrEmpty().not()) {
-            var isCheck = false
             holder.binding?.place = placeList[position]
             holder.binding?.root?.setOnClickListener {
-                isCheck = if (!isCheck) {
+                if (checked[position].not()) {
                     holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_check_circle_24dp)
                     checkPlaceList.value?.add(placeList[position])
-                    true
+                    Log.i("TAG", checkPlaceList.value?.size.toString())
+                    checked[position] = true
                 } else {
                     holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_not_check_circle_24dp)
                     checkPlaceList.value?.remove(placeList[position])
-                    false
+                    checked[position] = false
                 }
             }
             holder.binding?.executePendingBindings()

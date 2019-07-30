@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 import android.view.Menu
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Body
-import com.lukianbat.urbanist.urbanist_guide.feature.map.presentation.MapActivity
+import com.lukianbat.urbanist.urbanist_guide.feature.map.presentation.MapsActivity
 
 
 class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.OnQueryTextListener {
@@ -33,6 +33,7 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
 
     override fun initViewModel(state: Bundle?) {
         val layoutManager = LinearLayoutManager(this)
+        floatingActionAddNoteButton.isClickable = false
         placeRecyclerView.adapter = adapter
         placeRecyclerView.layoutManager = layoutManager
         viewModel.onBind()
@@ -46,6 +47,7 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
                 floatingActionAddNoteButton.isClickable = true
             }
         })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -93,7 +95,8 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
 
     private val eventsListener: PlaceListViewModel.EventsListener = object : PlaceListViewModel.EventsListener {
         override fun routeToMap() {
-            val intent = Intent(applicationContext, MapActivity::class.java)
+            val intent = Intent(applicationContext, MapsActivity::class.java)
+            intent.putParcelableArrayListExtra("checkPlaces", adapter.checkPlaceList.value)
             startActivity(intent)
         }
 

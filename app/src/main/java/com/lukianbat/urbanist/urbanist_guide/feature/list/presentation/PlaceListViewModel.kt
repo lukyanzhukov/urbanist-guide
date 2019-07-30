@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Body
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.repository.PlaceListRepository
-import com.lukianbat.urbanist.urbanist_guide.feature.start.StartViewModule
 import com.lukianbat.urbanist.urbanist_guide.сore.domain.PreferenceRepository
 import com.lukianbat.urbanist.urbanist_guide.сore.presentation.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers

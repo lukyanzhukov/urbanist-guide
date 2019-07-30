@@ -43,6 +43,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>() {
                 val intent = Intent(applicationContext, PlaceListActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
+                finish()
             }
 
         }

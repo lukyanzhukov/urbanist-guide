@@ -12,24 +12,30 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
+
 @Module
 class RetrofitModule {
 
-    private val okHttpClient = OkHttpClient.Builder()
+    private val SightsafariClient = OkHttpClient.Builder()
         .followSslRedirects(true)
-        .addInterceptor(getInterceptor())
+        .addInterceptor(getLoggingInterceptor())
         .build()
 
+    private val GraphhopperClient = OkHttpClient.Builder()
+        .followSslRedirects(true)
+        .addInterceptor(getLoggingInterceptor())
+        .addInterceptor(getGraphhopperInterceptor())
+        .build()
 
     @Provides
     @Singleton
-    @Named("google")
+    @Named("graphhopper")
     fun providesGoogleRetrofit(): Retrofit =
         Retrofit.Builder()
-            .baseUrl("http://maps.googleapis.com/maps/api/directions/")
+            .baseUrl("https://graphhopper.com/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
+            .client(GraphhopperClient)
             .build()
 
     @Provides
@@ -40,12 +46,33 @@ class RetrofitModule {
             .baseUrl("https://sightsafari.city/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
+            .client(SightsafariClient)
             .build()
 
-    private fun getInterceptor(): Interceptor {
+    private fun getLoggingInterceptor(): Interceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
     }
+
+    private fun getGraphhopperInterceptor() =
+        Interceptor { chain ->
+            val original = chain.request()
+            val originalHttpUrl = original.url()
+
+            val url = originalHttpUrl.newBuilder()
+                .addQueryParameter("key", "6f8e6fc9-71b4-402f-976e-2ac8aabf5c3c")
+                .addQueryParameter("vehicle", "foot")
+                .addQueryParameter("locale", "ru")
+                .addQueryParameter("optimize", "true")
+                .addQueryParameter("instructions", "false")
+                .build()
+
+            chain.proceed(
+                original.newBuilder()
+                    .url(url).build()
+            )
+
+        }
+
 }
