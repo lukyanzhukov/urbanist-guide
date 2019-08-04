@@ -8,11 +8,11 @@ data class PlacesRes(
 
     @SerializedName("code") val code: Int,
     @SerializedName("description") val description: String,
-    @SerializedName("body") val body: ArrayList<Body>
+    @SerializedName("body") val place: ArrayList<Place>
 )
 
 @Parcelize
-data class Body(
+data class Place(
 
     @SerializedName("originId") val originId: Long,
     @SerializedName("name") val name: String,

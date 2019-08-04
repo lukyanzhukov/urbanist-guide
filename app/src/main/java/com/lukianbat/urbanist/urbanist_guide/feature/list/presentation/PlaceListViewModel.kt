@@ -3,7 +3,7 @@ package com.lukianbat.urbanist.urbanist_guide.feature.list.presentation
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Body
+import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Place
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.repository.PlaceListRepository
 import com.lukianbat.urbanist.urbanist_guide.сore.domain.PreferenceRepository
 import com.lukianbat.urbanist.urbanist_guide.сore.presentation.BaseViewModel
@@ -17,7 +17,7 @@ class PlaceListViewModel @Inject constructor(
     private val preferenceRepository: PreferenceRepository
 ) : BaseViewModel() {
     lateinit var eventsListener: EventsListener
-    val liveData = MutableLiveData<ArrayList<Body>>()
+    val liveData = MutableLiveData<ArrayList<Place>>()
 
     init {
         getPlaces()
@@ -29,7 +29,7 @@ class PlaceListViewModel @Inject constructor(
         placeListRepository.getPlaces(city.lat, city.lng)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread()).subscribe({ result ->
-                liveData.value = result.body
+                liveData.value = result.place
             }, { error ->
                 Log.i("TAG", error.message.toString())
             }).addTo(disposables)

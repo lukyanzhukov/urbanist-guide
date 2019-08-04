@@ -2,6 +2,7 @@ package com.lukianbat.urbanist.urbanist_guide.feature.list.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_place_list.*
 import javax.inject.Inject
 
 import android.view.Menu
-import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Body
+import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Place
 import com.lukianbat.urbanist.urbanist_guide.feature.map.presentation.MapsActivity
 
 
@@ -33,7 +34,7 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
 
     override fun initViewModel(state: Bundle?) {
         val layoutManager = LinearLayoutManager(this)
-        floatingActionAddNoteButton.isClickable = false
+        floatingActionAddNoteButton.isEnabled = false
         placeRecyclerView.adapter = adapter
         placeRecyclerView.layoutManager = layoutManager
         viewModel.onBind()
@@ -43,8 +44,8 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
             adapter.updateEvents(it)
         })
         adapter.checkPlaceList.observe(this, Observer {
-            if (it.size > 2) {
-                floatingActionAddNoteButton.isClickable = true
+            if (it.size > 1) {
+                floatingActionAddNoteButton.isEnabled = true
             }
         })
 
@@ -63,7 +64,7 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query != null) {
-            val searchList = arrayListOf<Body>()
+            val searchList = arrayListOf<Place>()
             viewModel.liveData.value?.forEach {
                 if (it.name.isNullOrEmpty().not())
                     if (it.name.toLowerCase().contains(query.toLowerCase())) {
@@ -77,7 +78,7 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
 
     override fun onQueryTextChange(newText: String?): Boolean {
         if (!newText.isNullOrEmpty()) {
-            val searchList = arrayListOf<Body>()
+            val searchList = arrayListOf<Place>()
             viewModel.liveData.value?.forEach {
                 if (it.name.isNullOrEmpty().not())
                     if (it.name.toLowerCase().contains(newText.toLowerCase())) {

@@ -8,16 +8,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.lukianbat.urbanist.urbanist_guide.R
 import com.lukianbat.urbanist.urbanist_guide.databinding.ItemPlaceBinding
-import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Body
+import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Place
 
 
 class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
 
 
-    var placeList: ArrayList<Body> = arrayListOf()
-    var checkPlaceList = MutableLiveData<ArrayList<Body>>()
+    var placeList: ArrayList<Place> = arrayListOf()
+    var checkPlaceList = MutableLiveData<ArrayList<Place>>()
     lateinit var checked: Array<Boolean>
-    fun updateEvents(placeList: ArrayList<Body>) {
+    fun updateEvents(placeList: ArrayList<Place>) {
         this.placeList = placeList
         checked = Array(placeList.size) { false }
         checkPlaceList.value = arrayListOf()
@@ -39,11 +39,12 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
                 if (checked[position].not()) {
                     holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_check_circle_24dp)
                     checkPlaceList.value?.add(placeList[position])
-                    Log.i("TAG", checkPlaceList.value?.size.toString())
+                    checkPlaceList.postValue(checkPlaceList.value)
                     checked[position] = true
                 } else {
                     holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_not_check_circle_24dp)
                     checkPlaceList.value?.remove(placeList[position])
+                    checkPlaceList.postValue(checkPlaceList.value)
                     checked[position] = false
                 }
             }

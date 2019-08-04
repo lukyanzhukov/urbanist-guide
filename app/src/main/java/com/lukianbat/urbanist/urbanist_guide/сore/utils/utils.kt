@@ -1,5 +1,12 @@
 package com.lukianbat.urbanist.urbanist_guide.сore.utils
 
+import android.app.Activity
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import androidx.core.content.ContextCompat
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.lukianbat.urbanist.urbanist_guide.feature.map.domain.model.Point
 
 fun decodePolyline(encoded: String): ArrayList<Point> {
@@ -35,4 +42,13 @@ fun decodePolyline(encoded: String): ArrayList<Point> {
         poly.add(Point(lat.toDouble() / 1e5, lng.toDouble() / 1e5))
     }
     return poly
+}
+
+fun Activity.bitmapDescriptorFromVector(vectorResId: Int): BitmapDescriptor? {
+    return ContextCompat.getDrawable(baseContext, vectorResId)?.run {
+        setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+        val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
+        draw(Canvas(bitmap))
+        BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
 }

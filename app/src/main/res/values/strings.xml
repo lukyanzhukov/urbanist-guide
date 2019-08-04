@@ -28,5 +28,6 @@
         <item>30.26417</item>
         <item>101.5906257</item>
     </string-array>
+    <string name="colorMap">#F44336</string>
 
 </resources>
