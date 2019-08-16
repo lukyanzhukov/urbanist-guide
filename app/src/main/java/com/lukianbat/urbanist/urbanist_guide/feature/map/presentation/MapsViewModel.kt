@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MapsViewModel @Inject constructor(
-    private val mapRepository: MapRepository
+    private val repository: MapRepository
 ) : ViewModel() {
     val disposables = CompositeDisposable()
     val liveDataRoute = MutableLiveData<ArrayList<Point>>()
@@ -22,17 +22,15 @@ class MapsViewModel @Inject constructor(
     fun getRoute(placeList: ArrayList<Place>) {
         val points = arrayListOf<Point>()
         placeList.forEach {
-            points.add(Point(it.centroid[0], it.centroid[1]))
+            points.add(Point(it.lat, it.lng))
         }
-        mapRepository
+        repository
             .getRoute(points)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                Log.i("TAG", result.paths.first().points)
-                val points = decodePolyline(result.paths.first().points)
+                val points = decodePolyline(result.points)
                 liveDataRoute.value = points
-                Log.i("TAG", points.first().lng.toString() + "   " + points.first().lat.toString())
             }, { error ->
                 Log.i("TAG", error.message.toString())
             }).addTo(disposables)

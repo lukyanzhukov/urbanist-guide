@@ -36,7 +36,7 @@
 
                 <TextView android:layout_width="match_parent"
                           android:layout_height="wrap_content"
-                          tools:text='@{"Тип места: " + place.localizedSubtype}'
+                          tools:text='@{"Тип места: " + place.type}'
                           android:textSize="18sp"
                           android:textColor="@color/colorAccent"/>
                 <TextView android:layout_width="match_parent"

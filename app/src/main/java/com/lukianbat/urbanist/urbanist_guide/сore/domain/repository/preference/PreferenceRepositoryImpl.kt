@@ -1,27 +1,16 @@
-package com.lukianbat.urbanist.urbanist_guide.сore.domain
+package com.lukianbat.urbanist.urbanist_guide.сore.domain.repository.preference
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import com.lukianbat.urbanist.urbanist_guide.R
+import com.lukianbat.urbanist.urbanist_guide.сore.domain.City
 import javax.inject.Inject
 
-class PreferenceRepository @Inject constructor(context: Context) {
+class PreferenceRepositoryImpl @Inject constructor(val context: Context) : PreferenceRepository {
     private val preferences = context.getSharedPreferences("preferences", MODE_PRIVATE)
-    private val context = context
-    fun isLaunched(): Boolean = preferences.getBoolean(FIRST_LAUNCH_KEY, false)
 
-    fun launched() {
-        preferences.edit().putBoolean(FIRST_LAUNCH_KEY, true).apply()
-    }
-
-    fun isCorrectCity(city: String): Boolean {
-        val names: Array<String> = context.resources.getStringArray(R.array.cities)
-        return names.contains(city)
-    }
-
-    fun getCityName(): String? = preferences.getString(CITY_KEY, null)
-
-    fun getCity(): City {
+    override fun getCityName(): String? = preferences.getString(CITY_KEY, null)
+    override fun getCity(): City {
         val city = getCityName()
         val names: Array<String> = context.resources.getStringArray(R.array.cities)
         val lat = arrayListOf<Double>()
@@ -38,12 +27,11 @@ class PreferenceRepository @Inject constructor(context: Context) {
         return City(city, lat[index], lng[index])
     }
 
-    fun setCityName(city: String) {
+    override fun setCityName(city: String) {
         preferences.edit().putString(CITY_KEY, city).apply()
     }
 
     companion object {
-        const val FIRST_LAUNCH_KEY = "launched"
         const val CITY_KEY = "city"
     }
 

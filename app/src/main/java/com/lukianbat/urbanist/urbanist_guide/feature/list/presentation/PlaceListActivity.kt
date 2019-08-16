@@ -1,22 +1,28 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.list.presentation
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lukianbat.urbanist.urbanist_guide.R
+
 import com.lukianbat.urbanist.urbanist_guide.databinding.ActivityPlaceListBinding
 import com.lukianbat.urbanist.urbanist_guide.feature.list.presentation.recycler.PlacesAdapter
 import com.lukianbat.urbanist.urbanist_guide.сore.presentation.BaseActivity
 import kotlinx.android.synthetic.main.activity_place_list.*
-import javax.inject.Inject
 
+import javax.inject.Inject
 import android.view.Menu
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Place
+import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Places
+
 import com.lukianbat.urbanist.urbanist_guide.feature.map.presentation.MapsActivity
+import com.lukianbat.urbanist.urbanist_guide.сore.App
+import io.reactivex.schedulers.Schedulers
 
 
 class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.OnQueryTextListener {
@@ -44,7 +50,9 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
             adapter.updateEvents(it)
         })
         adapter.checkPlaceList.observe(this, Observer {
-            if (it.size > 1) {
+            if (App.hasNetwork().not())
+                viewModel.eventsListener.routeToCacheMap()
+            if (it.size in 2..6) {
                 floatingActionAddNoteButton.isEnabled = true
             }
         })
@@ -95,15 +103,25 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
     }
 
     private val eventsListener: PlaceListViewModel.EventsListener = object : PlaceListViewModel.EventsListener {
+        override fun routeToCacheMap() {
+            val intent = Intent(applicationContext, MapsActivity::class.java)
+            intent.putParcelableArrayListExtra("checkPlaces", viewModel.liveData.value)
+            startActivity(intent)
+        }
+
+        @SuppressLint("CheckResult")
         override fun routeToMap() {
             val intent = Intent(applicationContext, MapsActivity::class.java)
-            intent.putParcelableArrayListExtra("checkPlaces", adapter.checkPlaceList.value)
-            startActivity(intent)
+            viewModel.setCash(Places(adapter.checkPlaceList.value))
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    intent.putParcelableArrayListExtra("checkPlaces", adapter.checkPlaceList.value)
+                    startActivity(intent)
+                }
         }
 
         override fun showMessage(message: String) {
 
         }
     }
-
 }

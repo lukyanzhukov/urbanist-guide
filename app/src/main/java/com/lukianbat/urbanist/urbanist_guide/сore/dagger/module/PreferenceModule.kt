@@ -1,7 +1,8 @@
 package com.lukianbat.urbanist.urbanist_guide.сore.dagger.module
 
 import android.content.Context
-import com.lukianbat.urbanist.urbanist_guide.сore.domain.PreferenceRepository
+import com.lukianbat.urbanist.urbanist_guide.сore.domain.repository.preference.PreferenceRepository
+import com.lukianbat.urbanist.urbanist_guide.сore.domain.repository.preference.PreferenceRepositoryImpl
 import dagger.Module
 import dagger.Provides
 
@@ -9,5 +10,6 @@ import dagger.Provides
 class PreferenceModule {
 
     @Provides
-    fun providePreferenceRepo(context: Context): PreferenceRepository = PreferenceRepository(context)
+    fun providePreferenceRepo(context: Context): PreferenceRepository =
+        PreferenceRepositoryImpl(context)
 }

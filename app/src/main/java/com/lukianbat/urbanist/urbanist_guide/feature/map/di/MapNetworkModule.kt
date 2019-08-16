@@ -1,6 +1,7 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.map.di
 
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.repository.MapRepository
+import com.lukianbat.urbanist.urbanist_guide.feature.map.data.CacheRouteDao
 import com.lukianbat.urbanist.urbanist_guide.feature.map.domain.repository.MapRepositoryImpl
 import com.lukianbat.urbanist.urbanist_guide.feature.map.data.MapApi
 import com.lukianbat.urbanist.urbanist_guide.сore.dagger.scope.ActivityScope
@@ -18,5 +19,5 @@ class MapNetworkModule {
 
     @Provides
     @ActivityScope
-    fun provideRepository(mapApi: MapApi): MapRepository = MapRepositoryImpl(mapApi)
+    fun provideRepository(mapApi: MapApi, dao: CacheRouteDao): MapRepository = MapRepositoryImpl(mapApi, dao)
 }
