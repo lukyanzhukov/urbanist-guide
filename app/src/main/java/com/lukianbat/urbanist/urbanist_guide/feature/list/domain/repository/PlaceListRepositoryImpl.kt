@@ -1,11 +1,24 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.list.domain.repository
 
+import com.lukianbat.urbanist.urbanist_guide.feature.list.data.CachePlacesDao
 import com.lukianbat.urbanist.urbanist_guide.feature.list.data.PlaceListApi
-import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.PlacesRes
+import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Places
+
+import com.lukianbat.urbanist.urbanist_guide.сore.App
+import io.reactivex.Completable
 import io.reactivex.Single
 
-class PlaceListRepositoryImpl(private val placeListApi: PlaceListApi) : PlaceListRepository {
+class PlaceListRepositoryImpl(private val placeListApi: PlaceListApi, private val dao: CachePlacesDao) :
 
-    override fun getPlaces(lat: Double, lng: Double): Single<PlacesRes> = placeListApi.getPlaces(lat, lng)
+    PlaceListRepository {
 
+    override fun setCheckedPlaces(places: Places): Completable = dao.addPlaces(places)
+
+    override fun getPlaces(lat: Double, lng: Double): Single<Places> {
+        return if (App.hasNetwork()) {
+            placeListApi.getPlaces(lat, lng)
+        } else {
+            dao.getPlacesById(1)
+        }
+    }
 }

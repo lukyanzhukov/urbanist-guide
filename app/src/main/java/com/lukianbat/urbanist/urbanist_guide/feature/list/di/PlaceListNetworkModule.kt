@@ -1,5 +1,6 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.list.di
 
+import com.lukianbat.urbanist.urbanist_guide.feature.list.data.CachePlacesDao
 import com.lukianbat.urbanist.urbanist_guide.feature.list.data.PlaceListApi
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.repository.PlaceListRepository
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.repository.PlaceListRepositoryImpl
@@ -18,5 +19,6 @@ class PlaceListNetworkModule {
 
     @Provides
     @ActivityScope
-    fun provideRepository(placeListApi: PlaceListApi): PlaceListRepository = PlaceListRepositoryImpl(placeListApi)
+    fun provideRepository(placeListApi: PlaceListApi, dao: CachePlacesDao): PlaceListRepository =
+        PlaceListRepositoryImpl(placeListApi, dao)
 }

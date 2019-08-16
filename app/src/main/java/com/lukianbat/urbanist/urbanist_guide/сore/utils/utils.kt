@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.ConnectivityManager
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.lukianbat.urbanist.urbanist_guide.feature.map.domain.model.Point
+import com.lukianbat.urbanist.urbanist_guide.сore.App
 
 fun decodePolyline(encoded: String): ArrayList<Point> {
     val poly = arrayListOf<Point>()
@@ -16,7 +18,7 @@ fun decodePolyline(encoded: String): ArrayList<Point> {
     var lat = 0
     var lng = 0
     while (index < len) {
-        // latitude
+
         var b: Int
         var shift = 0
         var result = 0
@@ -28,7 +30,6 @@ fun decodePolyline(encoded: String): ArrayList<Point> {
         val deltaLatitude = if (result and 1 != 0) (result shr 1).inv() else result shr 1
         lat += deltaLatitude
 
-        // longitute
         shift = 0
         result = 0
         do {
@@ -42,6 +43,12 @@ fun decodePolyline(encoded: String): ArrayList<Point> {
         poly.add(Point(lat.toDouble() / 1e5, lng.toDouble() / 1e5))
     }
     return poly
+}
+
+fun App.checkInternet(): Boolean {
+    val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val netInfo = connectivityManager.activeNetworkInfo
+    return netInfo != null && netInfo.isConnected
 }
 
 fun Activity.bitmapDescriptorFromVector(vectorResId: Int): BitmapDescriptor? {

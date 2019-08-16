@@ -54,8 +54,8 @@ class MapsActivity : DaggerAppCompatActivity(), OnMapReadyCallback {
         googleMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 LatLng(
-                    placesList.first().centroid[0],
-                    placesList.first().centroid[1]
+                    placesList.first().lat,
+                    placesList.first().lng
                 ), 18.toFloat()
             )
         )
@@ -76,11 +76,11 @@ class MapsActivity : DaggerAppCompatActivity(), OnMapReadyCallback {
         val start = placesList.first()
         val finish = placesList.last()
         googleMap.addMarker(
-            MarkerOptions().position(LatLng(start.centroid[0], start.centroid[1])).title(start.name)
+            MarkerOptions().position(LatLng(start.lat, start.lng)).title(start.name)
                 .icon(bitmapDescriptorFromVector(R.drawable.ic_start_marker))
         )
         googleMap.addMarker(
-            MarkerOptions().position(LatLng(finish.centroid[0], finish.centroid[1])).title(finish.name)
+            MarkerOptions().position(LatLng(finish.lat, finish.lng)).title(finish.name)
                 .icon(bitmapDescriptorFromVector(R.drawable.ic_finish_marker))
         )
         val markers = arrayListOf<Place>()
@@ -91,7 +91,7 @@ class MapsActivity : DaggerAppCompatActivity(), OnMapReadyCallback {
         }
         markers.forEach {
             googleMap.addMarker(
-                MarkerOptions().position(LatLng(it.centroid[0], it.centroid[1])).title(it.name)
+                MarkerOptions().position(LatLng(it.lat, it.lng)).title(it.name)
                     .icon(bitmapDescriptorFromVector(R.drawable.ic_place_marker))
             )
         }
