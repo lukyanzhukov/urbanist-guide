@@ -1,6 +1,5 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.list.presentation.recycler
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,17 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lukianbat.urbanist.urbanist_guide.R
 import com.lukianbat.urbanist.urbanist_guide.databinding.ItemPlaceBinding
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Place
+import android.util.SparseBooleanArray
 
 
 class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
 
 
-    var placeList: ArrayList<Place> = arrayListOf()
+    private var placeList: ArrayList<Place> = arrayListOf()
     var checkPlaceList = MutableLiveData<ArrayList<Place>>()
-    lateinit var checked: Array<Boolean>
+    private val itemStateArray = SparseBooleanArray()
     fun updateEvents(placeList: ArrayList<Place>) {
         this.placeList = placeList
-        checked = Array(placeList.size) { false }
         checkPlaceList.value = arrayListOf()
         notifyDataSetChanged()
     }
@@ -34,18 +33,23 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
 
     override fun onBindViewHolder(holder: PlacesViewHolder, position: Int) {
         if (placeList[position].name.isNullOrEmpty().not()) {
+            if (!itemStateArray.get(position, false)) {
+                holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_not_check_circle_24dp)
+            } else {
+                holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_check_circle_24dp)
+            }
             holder.binding?.place = placeList[position]
             holder.binding?.root?.setOnClickListener {
-                if (checked[position].not()) {
+                if (!itemStateArray.get(position, false)) {
                     holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_check_circle_24dp)
                     checkPlaceList.value?.add(placeList[position])
                     checkPlaceList.postValue(checkPlaceList.value)
-                    checked[position] = true
+                    itemStateArray.put(position, true)
                 } else {
                     holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_not_check_circle_24dp)
                     checkPlaceList.value?.remove(placeList[position])
                     checkPlaceList.postValue(checkPlaceList.value)
-                    checked[position] = false
+                    itemStateArray.put(position, false);
                 }
             }
             holder.binding?.executePendingBindings()

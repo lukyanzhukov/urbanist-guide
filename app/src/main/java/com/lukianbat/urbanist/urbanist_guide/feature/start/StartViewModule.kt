@@ -21,7 +21,7 @@ class StartViewModule @Inject constructor(
             return
         }
         preferenceRepository.setCityName(city.value.toString())
-        eventsListener.routeToList()
+        eventsListener.routeToPlaceList()
     }
 
     fun setEventListener(eventsListener: EventsListener) {
@@ -30,6 +30,6 @@ class StartViewModule @Inject constructor(
 
     interface EventsListener {
         fun showMessage(message: String)
-        fun routeToList()
+        fun routeToPlaceList()
     }
 }

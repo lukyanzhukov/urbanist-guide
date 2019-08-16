@@ -11,15 +11,24 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:text="@string/dialog_permission_desc"/>
+            android:text="@string/dialog_permission_desc"
+            android:textAlignment="center"/>
 
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            app:srcCompat="@drawable/screen"/>
 
-    <Button
+    <TextView
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
+            android:gravity="end"
             android:textSize="18sp"
-            android:text="@string/ok_button_text"
-  />
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/ok_button_text"/>
 </LinearLayout>

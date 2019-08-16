@@ -52,7 +52,7 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
         adapter.checkPlaceList.observe(this, Observer {
             if (App.hasNetwork().not())
                 viewModel.eventsListener.routeToCacheMap()
-            if (it.size in 2..6) {
+            if (it.size > 1 && it.size < 6) {
                 floatingActionAddNoteButton.isEnabled = true
             }
         })
