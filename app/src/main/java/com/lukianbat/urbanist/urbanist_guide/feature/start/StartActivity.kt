@@ -28,13 +28,14 @@ class StartActivity : BaseActivity<ActivityStartBinding>() {
     override fun initViewModel(state: Bundle?) {
         viewModel.onBind()
         viewModel.setEventListener(eventsListener)
+
     }
 
     private val eventsListener: StartViewModule.EventsListener =
         object : StartViewModule.EventsListener {
 
-            override fun showMessage(message: String) {
-                Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT)
+            override fun showMessage(messageId: Int) {
+                Snackbar.make(findViewById(android.R.id.content), resources.getString(messageId), Snackbar.LENGTH_SHORT)
                     .show()
             }
 
@@ -55,7 +56,6 @@ class StartActivity : BaseActivity<ActivityStartBinding>() {
                     if (report.deniedPermissionResponses.isEmpty().not()) {
                         showDeniedLocationDialog()
                     } else {
-                        viewModel.eventsListener.showMessage("город выбран")
                         val intent = Intent(applicationContext, PlaceListActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)

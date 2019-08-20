@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools">
 
@@ -56,7 +56,7 @@
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_not_check_circle_24dp" android:id="@+id/imageView"/>
+                        android:id="@+id/imageView"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

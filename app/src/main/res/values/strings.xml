@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">Урбанист.Гид</string>
     <string name="place_list_title">Куда зайдём?</string>
-    <string name="base_url">vwksdmomsco.com</string>
-    <string name="dialog_permission_desc">Для перехода к приложению разрешите определять вашу локацию в настройках
+    <string name="dialog_permission_desc">Для перехода к приложению разреши определять локацию в настройках
     </string>
+    <string name="error_message">Что-то пошло не так..</string>
+    <string name="unknown_city_message">Такого города ещё не знаю..</string>
+    <string name="null_city_message">Введи имя города!</string>
+    <string name="loading_message">Ищем что-нибудь интересное</string>
+    <string name="over_places_message">Слишком много мест!</string>
     <string name="ok_button_text">Ок</string>
 
     <string-array name="cities">

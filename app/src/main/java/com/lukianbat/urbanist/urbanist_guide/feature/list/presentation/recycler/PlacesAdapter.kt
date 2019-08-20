@@ -34,19 +34,19 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
     override fun onBindViewHolder(holder: PlacesViewHolder, position: Int) {
         if (placeList[position].name.isNullOrEmpty().not()) {
             if (!itemStateArray.get(position, false)) {
-                holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_not_check_circle_24dp)
+                holder.binding?.imageView?.setImageResource(R.drawable.ic_not_check_circle_24dp)
             } else {
-                holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_check_circle_24dp)
+                holder.binding?.imageView?.setImageResource(R.drawable.ic_check_circle_24dp)
             }
             holder.binding?.place = placeList[position]
             holder.binding?.root?.setOnClickListener {
                 if (!itemStateArray.get(position, false)) {
-                    holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_check_circle_24dp)
+                    holder.binding?.imageView?.setImageResource(R.drawable.ic_check_circle_24dp)
                     checkPlaceList.value?.add(placeList[position])
                     checkPlaceList.postValue(checkPlaceList.value)
                     itemStateArray.put(position, true)
                 } else {
-                    holder.binding?.imageView?.setBackgroundResource(R.drawable.ic_not_check_circle_24dp)
+                    holder.binding?.imageView?.setImageResource(R.drawable.ic_not_check_circle_24dp)
                     checkPlaceList.value?.remove(placeList[position])
                     checkPlaceList.postValue(checkPlaceList.value)
                     itemStateArray.put(position, false);
@@ -55,7 +55,6 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
             holder.binding?.executePendingBindings()
         }
     }
-
 }
 
 class PlacesViewHolder(binding: ItemPlaceBinding) : RecyclerView.ViewHolder(binding.root) {
