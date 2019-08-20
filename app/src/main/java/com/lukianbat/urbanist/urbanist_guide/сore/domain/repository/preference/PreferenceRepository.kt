@@ -5,5 +5,5 @@ import com.lukianbat.urbanist.urbanist_guide.сore.domain.City
 interface PreferenceRepository {
     fun getCityName(): String?
     fun getCity(): City
-    fun setCityName(city: String)
+    fun setCityName(city: String, callback: StatusCallback)
 }

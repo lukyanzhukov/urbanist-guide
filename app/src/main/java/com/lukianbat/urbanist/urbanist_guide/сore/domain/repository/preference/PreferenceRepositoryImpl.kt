@@ -12,7 +12,7 @@ class PreferenceRepositoryImpl @Inject constructor(val context: Context) : Prefe
     override fun getCityName(): String? = preferences.getString(CITY_KEY, null)
     override fun getCity(): City {
         val city = getCityName()
-        val names: Array<String> = context.resources.getStringArray(R.array.cities)
+        val citiesNames: Array<String> = context.resources.getStringArray(R.array.cities)
         val lat = arrayListOf<Double>()
         val lng = arrayListOf<Double>()
         val latString = context.resources.getStringArray(R.array.cities_lat)
@@ -23,12 +23,17 @@ class PreferenceRepositoryImpl @Inject constructor(val context: Context) : Prefe
         lngString.forEach {
             lng.add(it.toDouble())
         }
-        val index = names.indexOf(city)
+        val index = citiesNames.indexOf(city)
         return City(city, lat[index], lng[index])
     }
 
-    override fun setCityName(city: String) {
-        preferences.edit().putString(CITY_KEY, city).apply()
+    override fun setCityName(city: String, callback: StatusCallback) {
+        val citiesNames: Array<String> = context.resources.getStringArray(R.array.cities)
+        if (citiesNames.contains(city)) {
+            preferences.edit().putString(CITY_KEY, city).apply()
+            callback.onSuccess()
+        } else
+            callback.onError()
     }
 
     companion object {

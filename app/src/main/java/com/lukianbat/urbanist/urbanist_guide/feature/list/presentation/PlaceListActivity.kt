@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_place_list.*
 
 import javax.inject.Inject
 import android.view.Menu
+import com.google.android.material.snackbar.Snackbar
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Place
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Places
 
@@ -40,20 +41,26 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
 
     override fun initViewModel(state: Bundle?) {
         val layoutManager = LinearLayoutManager(this)
-        floatingActionAddNoteButton.isEnabled = false
+        floatingActionAddNoteButton.hide()
+
         placeRecyclerView.adapter = adapter
         placeRecyclerView.layoutManager = layoutManager
         viewModel.onBind()
         viewModel.setEventListener(eventsListener)
         viewModel.liveData.observe(this, Observer {
-            progressBar.visibility = View.GONE
+            if (App.hasNetwork().not())
+                viewModel.eventsListener.routeToCacheMap()
+            progress_message.visibility = View.GONE
             adapter.updateEvents(it)
         })
         adapter.checkPlaceList.observe(this, Observer {
-            if (App.hasNetwork().not())
-                viewModel.eventsListener.routeToCacheMap()
-            if (it.size > 1 && it.size < 6) {
-                floatingActionAddNoteButton.isEnabled = true
+            if (it.size in 2..5) {
+                floatingActionAddNoteButton.show()
+            } else {
+                if (it.size > 5) {
+                    eventsListener.showMessage(R.string.over_places_message)
+                }
+                floatingActionAddNoteButton.hide()
             }
         })
 
@@ -66,7 +73,6 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
         searchView.queryHint = "Поиск"
         searchView.setOnQueryTextListener(this)
         searchView.isIconified = false
-
         return true
     }
 
@@ -120,7 +126,9 @@ class PlaceListActivity : BaseActivity<ActivityPlaceListBinding>(), SearchView.O
                 }
         }
 
-        override fun showMessage(message: String) {
+        override fun showMessage(messageId: Int) {
+            Snackbar.make(findViewById(android.R.id.content), resources.getString(messageId), Snackbar.LENGTH_SHORT)
+                .show()
 
         }
     }

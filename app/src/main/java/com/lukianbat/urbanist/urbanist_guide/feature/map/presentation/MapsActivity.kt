@@ -50,16 +50,16 @@ class MapsActivity : DaggerAppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupMap(googleMap: GoogleMap) {
-
+        googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 LatLng(
                     placesList.first().lat,
                     placesList.first().lng
-                ), 18.toFloat()
+                ), 13.toFloat()
             )
         )
-        googleMap.setMinZoomPreference(15.0f)
+        googleMap.setMinZoomPreference(10.5f)
         googleMap.setMaxZoomPreference(25.0f)
         googleMap.isBuildingsEnabled = true
     }

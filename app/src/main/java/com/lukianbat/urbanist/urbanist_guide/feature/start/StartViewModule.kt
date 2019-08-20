@@ -1,7 +1,9 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.start
 
 import androidx.lifecycle.MutableLiveData
+import com.lukianbat.urbanist.urbanist_guide.R
 import com.lukianbat.urbanist.urbanist_guide.сore.domain.repository.preference.PreferenceRepositoryImpl
+import com.lukianbat.urbanist.urbanist_guide.сore.domain.repository.preference.StatusCallback
 import com.lukianbat.urbanist.urbanist_guide.сore.presentation.BaseViewModel
 import javax.inject.Inject
 
@@ -13,15 +15,35 @@ class StartViewModule @Inject constructor(
 
     init {
         city.value = preferenceRepository.getCityName()
+        city.observeForever {
+            if (it.contains(' ') || it.contains('\n')) {
+                var res = ""
+                for (i in it) {
+                    if (i != ' ' && i != '\n') {
+                        res += i
+                    }
+                }
+                city.value = res
+            }
+        }
     }
 
     fun onOkClick() {
         if (city.value.isNullOrEmpty()) {
-            eventsListener.showMessage("Введите город!")
+            eventsListener.showMessage(R.string.null_city_message)
             return
         }
-        preferenceRepository.setCityName(city.value.toString())
-        eventsListener.routeToPlaceList()
+        preferenceRepository.setCityName(city.value.toString(), object : StatusCallback {
+
+            override fun onSuccess() {
+                eventsListener.routeToPlaceList()
+            }
+
+            override fun onError() {
+                eventsListener.showMessage(R.string.unknown_city_message)
+            }
+
+        })
     }
 
     fun setEventListener(eventsListener: EventsListener) {
@@ -29,7 +51,7 @@ class StartViewModule @Inject constructor(
     }
 
     interface EventsListener {
-        fun showMessage(message: String)
+        fun showMessage(messageId: Int)
         fun routeToPlaceList()
     }
 }

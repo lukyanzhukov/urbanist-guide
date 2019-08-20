@@ -1,8 +1,8 @@
 package com.lukianbat.urbanist.urbanist_guide.feature.list.presentation
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.lukianbat.urbanist.urbanist_guide.R
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Place
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Places
 import com.lukianbat.urbanist.urbanist_guide.feature.list.domain.repository.PlaceListRepository
@@ -33,7 +33,7 @@ class PlaceListViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread()).subscribe({ result ->
                 liveData.value = result.places
             }, { error ->
-                Log.i("TAG", error.message.toString())
+                eventsListener.showMessage(R.string.error_message)
             }).addTo(disposables)
 
     }
@@ -45,7 +45,7 @@ class PlaceListViewModel @Inject constructor(
     interface EventsListener {
         fun routeToCacheMap()
         fun routeToMap()
-        fun showMessage(message: String)
+        fun showMessage(messageId: Int)
     }
 
     fun setCash(places: Places): Completable = repository.setCheckedPlaces(places)
