@@ -6,7 +6,7 @@
 
     <data>
         <variable name="place"
-                  type="com.lukianbat.urbanist.urbanist_guide.feature.list.domain.model.Place"/>
+                  type="com.lukianbat.urbanist.guide.feature.list.domain.model.Place"/>
     </data>
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.lukianbat.urbanist.urbanist_guide">
+          package="com.lukianbat.urbanist.guide">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-            android:name=".сore.App"
+            android:name="com.lukianbat.urbanist.guide.сore.App"
             android:allowBackup="true"
             android:icon="@drawable/ic_icon"
             android:label="@string/app_name"
@@ -22,12 +22,12 @@
                 android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".feature.map.presentation.MapsActivity"
+                android:name="com.lukianbat.urbanist.guide.feature.map.presentation.MapsActivity"
                 android:label="@string/app_name">
         </activity>
 
         <activity
-                android:name=".feature.start.StartActivity"
+                android:name="com.lukianbat.urbanist.guide.feature.start.StartActivity"
                 android:screenOrientation="portrait">
 
             <intent-filter>
@@ -37,7 +37,7 @@
 
         </activity>
         <activity
-                android:name=".feature.list.presentation.PlaceListActivity"
+                android:name="com.lukianbat.urbanist.guide.feature.list.presentation.PlaceListActivity"
                 android:label="@string/place_list_title"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppListTheme">

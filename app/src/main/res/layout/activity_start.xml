@@ -5,7 +5,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.lukianbat.urbanist.urbanist_guide.feature.start.StartViewModule"/>
+                type="com.lukianbat.urbanist.guide.feature.start.StartViewModule"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:background="@android:color/white"
