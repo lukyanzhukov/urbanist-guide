@@ -6,7 +6,7 @@
 
         <variable
                 name="viewModel"
-                type="com.lukianbat.urbanist.urbanist_guide.feature.list.presentation.PlaceListViewModel"/>
+                type="com.lukianbat.urbanist.guide.feature.list.presentation.PlaceListViewModel"/>
     </data>
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="match_parent">
