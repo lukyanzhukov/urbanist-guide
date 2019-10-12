@@ -5,6 +5,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+String[] citiesArray = cities.split(',')
+String[] latArray = lat.split(',')
+String[] lngArray = lng.split(',')
 
 android {
     androidExtensions {
@@ -19,6 +22,27 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String[]", "CITIES_ARRAY", "{" +
+                "\"" + citiesArray[0] + "\"," +
+                "\"" + citiesArray[1] + "\"," +
+                "\"" + citiesArray[2] + "\"," +
+                "\"" + citiesArray[3] + "\"," +
+                "\"" + citiesArray[4] + "\"" +
+                "}"
+        buildConfigField "String[]", "LAT_ARRAY", "{" +
+                "\"" + latArray[0] + "\"," +
+                "\"" + latArray[1] + "\"," +
+                "\"" + latArray[2] + "\"," +
+                "\"" + latArray[3] + "\"," +
+                "\"" + latArray[4] + "\"" +
+                "}"
+        buildConfigField "String[]", "LNG_ARRAY", "{" +
+                "\"" + lngArray[0] + "\"," +
+                "\"" + lngArray[1] + "\"," +
+                "\"" + lngArray[2] + "\"," +
+                "\"" + lngArray[3] + "\"," +
+                "\"" + lngArray[4] + "\"" +
+                "}"
     }
     buildTypes {
 
@@ -54,7 +78,8 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
     implementation "com.google.dagger:dagger-android:$dagger2_version"
-    implementation "com.google.dagger:dagger-android-support:$dagger2_version" // if you use the support libraries
+    implementation "com.google.dagger:dagger-android-support:$dagger2_version"
+    // if you use the support libraries
     kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
 
     //Retrofit2
@@ -76,7 +101,8 @@ dependencies {
     implementation "com.karumi:dexter:5.0.0"
 
     implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version" // For Java use annotationProcessor instead of kapt
+    kapt "androidx.room:room-compiler:$room_version"
+    // For Java use annotationProcessor instead of kapt
     implementation "androidx.room:room-rxjava2:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
 

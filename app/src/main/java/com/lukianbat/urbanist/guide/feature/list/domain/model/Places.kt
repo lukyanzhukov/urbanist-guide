@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.lukianbat.urbanist.guide.feature.list.data.CachePlacesConverter
+import com.lukianbat.urbanist.guide.feature.list.data.datasource.db.CachePlacesConverter
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

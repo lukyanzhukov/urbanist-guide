@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lukianbat.urbanist.guide.feature.list.domain.model.Place
-import com.lukianbat.urbanist.guide.feature.list.domain.repository.MapRepository
+import com.lukianbat.urbanist.guide.feature.list.data.repository.MapRepository
 import com.lukianbat.urbanist.guide.feature.map.domain.model.Point
 import com.lukianbat.urbanist.guide.сore.utils.decodePolyline
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -25,7 +25,12 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlacesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate(inflater, R.layout.item_place, parent, false) as ItemPlaceBinding
+        val binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.item_place,
+            parent,
+            false
+        ) as ItemPlaceBinding
         return PlacesViewHolder(binding)
     }
 

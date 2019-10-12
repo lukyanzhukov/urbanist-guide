@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-                android:name="com.lukianbat.urbanist.guide.feature.start.StartActivity"
+                android:name="com.lukianbat.urbanist.guide.feature.start.presentation.StartActivity"
                 android:screenOrientation="portrait">
 
             <intent-filter>
@@ -37,7 +37,7 @@
 
         </activity>
         <activity
-                android:name="com.lukianbat.urbanist.guide.feature.list.presentation.PlaceListActivity"
+                android:name="com.lukianbat.urbanist.guide.feature.list.presentation.PlacesListActivity"
                 android:label="@string/place_list_title"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppListTheme">

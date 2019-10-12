@@ -2,7 +2,7 @@ package com.lukianbat.urbanist.guide.feature.map.domain.repository
 
 import android.annotation.SuppressLint
 import android.util.Log
-import com.lukianbat.urbanist.guide.feature.list.domain.repository.MapRepository
+import com.lukianbat.urbanist.guide.feature.list.data.repository.MapRepository
 import com.lukianbat.urbanist.guide.feature.map.data.CacheRouteDao
 import com.lukianbat.urbanist.guide.feature.map.data.MapApi
 import com.lukianbat.urbanist.guide.feature.map.domain.model.Point
