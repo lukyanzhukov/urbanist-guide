@@ -1,4 +1,4 @@
-package com.lukianbat.urbanist.guide.feature.map.data
+package com.lukianbat.urbanist.guide.feature.map.data.datasource.cache
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

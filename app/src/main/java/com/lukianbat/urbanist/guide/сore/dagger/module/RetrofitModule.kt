@@ -15,7 +15,7 @@ import com.google.gson.Gson
 import com.lukianbat.urbanist.guide.feature.list.domain.model.Places
 import com.lukianbat.urbanist.guide.feature.map.domain.model.RouteModel
 import com.lukianbat.urbanist.guide.feature.list.data.datasource.api.PlacesDeserializer
-import com.lukianbat.urbanist.guide.feature.map.domain.RouteDeserializer
+import com.lukianbat.urbanist.guide.feature.map.data.datasource.api.RouteDeserializer
 
 
 @Module

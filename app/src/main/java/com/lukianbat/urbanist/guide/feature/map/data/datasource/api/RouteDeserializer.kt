@@ -1,4 +1,4 @@
-package com.lukianbat.urbanist.guide.feature.map.domain
+package com.lukianbat.urbanist.guide.feature.map.data.datasource.api
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
