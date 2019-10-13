@@ -1,5 +1,5 @@
 # Урбанист.Гид
-![Иконка](https://github.com/LukianBat/urbanist-guide/blob/master/google-play-badge.png)
+<a href='https://play.google.com/store/apps/details?id=com.lukianbat.urbanist.urbanist_guide&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Доступно в Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/ru_badge_web_generic.png'/></a>
 # Описание
 Когда планируешь путешествие в интересный город с богатой историей хочется посетить как можно больше достопримечательностей, при этом сделать это с умом и удобством. В этом вам поможет Урбанист.Гид, простое и понятное приложение предложит вам список достопримечательностей города, а также поможет проложить вам оптимизированный пешеходный маршрут по всем выбранным местам.
 Конечно, пока что приложение обладает достаточно простым функционалом и работает только в небольшом списке городов России, в дальнейшем планируем развивать данный проект при активном отклике пользователей.  
