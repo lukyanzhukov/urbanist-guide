@@ -1,5 +1,6 @@
 package com.lukianbat.urbanist.guide.feature.start.data.repository
 
+import android.util.Log
 import com.lukianbat.urbanist.guide.BuildConfig
 import com.lukianbat.urbanist.guide.feature.start.data.datasource.CityDataSource
 import javax.inject.Inject
@@ -16,6 +17,9 @@ class CityRepositoryImpl @Inject constructor(private val dataSource: CityDataSou
 
     override fun setCityName(city: String, callback: StatusCallback) {
         val citiesNames: Array<String> = BuildConfig.CITIES_ARRAY
+        citiesNames.forEach {
+            Log.i("TAG", it)
+        }
         if (citiesNames.contains(city)) {
             dataSource.setCityName(city)
             callback.onSuccess()

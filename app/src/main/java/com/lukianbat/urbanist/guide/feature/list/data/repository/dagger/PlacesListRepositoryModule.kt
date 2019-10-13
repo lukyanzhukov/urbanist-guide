@@ -8,7 +8,6 @@ import com.lukianbat.urbanist.guide.feature.list.data.datasource.db.dagger.Place
 import com.lukianbat.urbanist.guide.feature.list.data.repository.PlacesListRepository
 import com.lukianbat.urbanist.guide.feature.list.data.repository.PlacesListRepositoryImpl
 import com.lukianbat.urbanist.guide.feature.start.data.datasource.CityDataSource
-import com.lukianbat.urbanist.guide.feature.start.data.datasource.dagger.CityDataSourceModule
 import dagger.Module
 import dagger.Provides
 

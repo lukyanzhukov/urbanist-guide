@@ -48,7 +48,7 @@ class PlacesListActivity :
         placeRecyclerView.layoutManager = layoutManager
         viewModel.liveData.observe(this, Observer {
             if (App.hasNetwork().not())
-                viewModel.eventsListener.routeToCacheMap()
+                routeToCacheMap()
             progress_message.visibility = View.GONE
             adapter.updateEvents(it)
         })
@@ -74,6 +74,7 @@ class PlacesListActivity :
         return true
     }
 
+    @SuppressLint("DefaultLocale")
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query != null) {
             val searchList = arrayListOf<Place>()
@@ -88,6 +89,7 @@ class PlacesListActivity :
         return true
     }
 
+    @SuppressLint("DefaultLocale")
     override fun onQueryTextChange(newText: String?): Boolean {
         if (!newText.isNullOrEmpty()) {
             val searchList = arrayListOf<Place>()

@@ -6,7 +6,6 @@ import com.lukianbat.urbanist.guide.feature.start.domain.usecases.GetCityNameUse
 import com.lukianbat.urbanist.guide.feature.start.domain.usecases.GetCityNameUseCaseImpl
 import com.lukianbat.urbanist.guide.feature.start.domain.usecases.SetCityNameUseCase
 import com.lukianbat.urbanist.guide.feature.start.domain.usecases.SetCityNameUseCaseImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 

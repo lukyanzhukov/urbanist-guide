@@ -21,7 +21,6 @@ class PlacesListViewModel @Inject constructor(
     private val setPlacesUseCase: SetPlacesUseCase
 ) : BaseViewModel(), EventsDispatcherOwner<PlacesListViewModel.EventsListener> {
     override val eventsDispatcher: EventsDispatcher<EventsListener> = EventsDispatcher()
-    lateinit var eventsListener: EventsListener
     val liveData = MutableLiveData<ArrayList<Place>>()
 
     init {
@@ -35,13 +34,9 @@ class PlacesListViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread()).subscribe({ result ->
                 liveData.value = result.places
             }, {
-                eventsListener.showMessage(R.string.error_message)
+                eventsDispatcher.dispatchEvent { showMessage(R.string.error_message) }
             }).addTo(compositeDisposable)
 
-    }
-
-    fun setEventListener(eventsListener: EventsListener) {
-        this.eventsListener = eventsListener
     }
 
     interface EventsListener {
@@ -53,6 +48,6 @@ class PlacesListViewModel @Inject constructor(
     fun setCash(places: Places): Completable = setPlacesUseCase.setPlaces(places)
 
     fun onClick() {
-        eventsListener.routeToMap()
+        eventsDispatcher.dispatchEvent { routeToMap() }
     }
 }

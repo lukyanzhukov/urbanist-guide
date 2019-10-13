@@ -1,10 +1,8 @@
 package com.lukianbat.urbanist.guide.feature.start.data.repository.dagger
 
 import com.lukianbat.urbanist.guide.feature.start.data.datasource.CityDataSource
-import com.lukianbat.urbanist.guide.feature.start.data.datasource.dagger.CityDataSourceModule
 import com.lukianbat.urbanist.guide.feature.start.data.repository.CityRepository
 import com.lukianbat.urbanist.guide.feature.start.data.repository.CityRepositoryImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
